@@ -15,6 +15,7 @@
     <body>
         <h1>Client Information</h1>
         <form action="./ClientServlet" method="POST">
+        
         <table>
             <tr>
                 <td>Client ID </td>
@@ -64,5 +65,24 @@
         
         
         </table>
+        
+        
+        <h1> ----Flights Details---- </h1>
+       
+        <table>
+            <th> Flight Id</th>
+            <th> Origin </th>
+            <th> Destination </th>
+            <c:forEach items="${allFlightsfromServlet}" var="fl">
+                <tr>
+                    <td>${fl.flightId}</td>
+                    <td>${fl.origin}</td>
+                    <td>${fl.destination}</td>
+                </tr>
+            </c:forEach>
+            
+        </table>
+         </form>
+        
     </body>
 </html>

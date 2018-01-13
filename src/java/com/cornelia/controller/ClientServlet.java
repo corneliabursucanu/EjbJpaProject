@@ -6,6 +6,7 @@
 package com.cornelia.controller;
 
 import com.cornelia.dao.ClientDAO;
+import com.cornelia.dao.FlightDao;
 import com.cornelia.model.Client;
 import java.io.IOException;
 import javax.ejb.EJB;
@@ -23,6 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 public class ClientServlet extends HttpServlet {
 @EJB
 private ClientDAO clientDao;
+
+@EJB
+private FlightDao flightDao;
   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -53,6 +57,7 @@ private ClientDAO clientDao;
         
         request.setAttribute("client", client);
         request.setAttribute("allClients", clientDao.getAllClients());
+        request.setAttribute("allFlightsfromServlet", flightDao.getAllFlights());
         
         request.getRequestDispatcher("clientInfo.jsp").forward(request, response);
         
