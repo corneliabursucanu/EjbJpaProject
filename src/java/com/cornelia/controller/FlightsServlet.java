@@ -30,7 +30,7 @@ public class FlightsServlet extends HttpServlet {
 
     
    @EJB
-   private FlightDao fd = null;
+   private FlightDao fdao = null;
     
 
    
@@ -41,8 +41,8 @@ public class FlightsServlet extends HttpServlet {
     
     try {
 	Context context = new InitialContext();
-        Object f = context.lookup("java:global/EjbJpaProject/FlightDao!com.cornelia.dao.FlightDao");
-	fd = (FlightDao) f ;
+        Object obj = context.lookup("java:global/EjbJpaProject/FlightDao!com.cornelia.dao.FlightDao");
+	fdao = (FlightDao) obj ;
 			
 			
 			
@@ -52,16 +52,12 @@ public class FlightsServlet extends HttpServlet {
 			
 		}
 		
-		if (fd!=null)
+		if (fdao!=null)
 			System.out.println("OK JNDI");
                 
-      List<Flight> fList = (List<Flight>)fd.getAllFlights();
-      request.setAttribute("flightList", fList);
-      PrintWriter out = response.getWriter();
-      
-      out.println("List of flights will be displayed here...");
-      RequestDispatcher view = request.getRequestDispatcher("clientInfo.jsp");
-      view.forward(request, response);
+          request.setAttribute("allFlights", fdao.getAllFlights());
+        
+        request.getRequestDispatcher("flightsInfo.jsp").forward(request, response);
     
     }
 
