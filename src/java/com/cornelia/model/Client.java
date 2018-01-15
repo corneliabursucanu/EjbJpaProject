@@ -6,12 +6,14 @@
 package com.cornelia.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -33,8 +35,10 @@ public class Client implements Serializable {
     private String firstname;
     @Column
     private String lastname;
-    @Column
+    @Column(name="flightId")
     private int flightId;
+    
+    
 
     public Client(int clientId, String firstname, String lastname, int flightId) {
         this.clientId = clientId;
@@ -81,6 +85,7 @@ public class Client implements Serializable {
         this.flightId = flightId;
     }
 
+    
     @Override
     public String toString() {
         return "Client{" + "clientId=" + clientId + ", firstname=" + firstname + ", lastname=" + lastname + ", flightId=" + flightId + '}';

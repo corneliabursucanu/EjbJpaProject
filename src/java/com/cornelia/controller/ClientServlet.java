@@ -28,9 +28,20 @@ private ClientDAO clientDao;
 @EJB
 private FlightDao flightDao;
   
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
+        request.setAttribute("allClients", clientDao.getAllClients());
+        request.setAttribute("allFlightsfromServlet", flightDao.getAllFlights());
+        
+        request.getRequestDispatcher("clientInfo.jsp").forward(request, response);
+    }
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String action = request.getParameter("action");
         String clientIdStr = request.getParameter("clientId");
         int clientId = 0;
@@ -58,21 +69,8 @@ private FlightDao flightDao;
         request.setAttribute("client", client);
         request.setAttribute("allClients", clientDao.getAllClients());
         request.setAttribute("allFlightsfromServlet", flightDao.getAllFlights());
-        
         request.getRequestDispatcher("clientInfo.jsp").forward(request, response);
         
-        }
-    
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-    
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**

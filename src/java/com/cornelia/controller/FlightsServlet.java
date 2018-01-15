@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 public class FlightsServlet extends HttpServlet {
 
     
-   @EJB
+   
    private FlightDao fdao = null;
     
 

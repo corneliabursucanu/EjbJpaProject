@@ -25,11 +25,15 @@ import javax.persistence.Table;
 
 public class Flight implements Serializable {
     @Id
+    @Column(name="flightId")
     private Integer flightId;
     @Column
     private String origin;
     @Column
     private String destination;
+    
+   
+    
 
     public Flight() {
     }
